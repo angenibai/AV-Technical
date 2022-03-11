@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# ignore for now - maybe remove?
+CMakeFiles/
+build/

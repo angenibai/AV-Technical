@@ -1,6 +1,6 @@
 // Question 1 Install g tests and add to cmakes lists
 #include "gtest/gtest.h"
-
+#include <iostream>
 
 const int values[] = { 1,2,3,4,5 };
 const int NVALS = sizeof values / sizeof (int);
@@ -53,11 +53,11 @@ int Main()
     // Question 2
     int x = 10;
     int y = 15;
-    cout << " "<< (x, y) << std::endl;
+    std::cout << " "<< (x, y) << std::endl;
 
     // Question 3 Get the function to run
-    char arr[] = { "ant", "bat", "cat", "dog", "egg", "fly" };
-	function(arr);
+    char *arr[] = { "ant", "bat", "cat", "dog", "egg", "fly" };
+	function(&arr);
 
 
     // Question 4 Insert in map
@@ -119,7 +119,7 @@ int Main()
 }
 
 // Do not change anything besides the ptr variable
-void function(char ptr)
+void function(char **ptr)
 {
 	char *ptr1;
 	ptr1 = (ptr += sizeof(int))[-2];
