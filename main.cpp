@@ -3,6 +3,8 @@
 #include <iostream>
 #include <map>
 #include <cmath>
+#include <thread>
+#include <mutex>
 
 const int values[] = { 1,2,3,4,5 };
 const int NVALS = sizeof values / sizeof (int);
@@ -17,6 +19,7 @@ int total = 0;
 class Wallet
 {
     int mMoney;
+    std::mutex money_lock;
 public:
     Wallet() :mMoney(0){}
     int getMoney() { return mMoney; }
@@ -24,7 +27,9 @@ public:
     {
        for(int i = 0; i < money; ++i)
        {
+          money_lock.lock();
           mMoney++;
+          money_lock.unlock();
        }
     }
 };
@@ -34,19 +39,23 @@ struct {
    float weight;
 } person;
 
-// int testerFunction()
-// {
-//    Wallet walletObject;
-//    std::vector<std::thread> threads;
-//    for(int i = 0; i < 5; ++i){
-//         threads.push_back(std::thread(&Wallet::addMoney, &walletObject, 1000));
-//    }
-//    for(int i = 0; i < threads.size() ; i++)
-//    {
-//        threads.at(i).join();
-//    }
-//    return walletObject.getMoney();
-// }
+// gtest
+TEST(WalletTest, HandlesThreads) {
+    Wallet walletObject;
+    std::vector<std::thread> threads;
+    for(int i = 0; i < 5; ++i){
+            threads.push_back(std::thread(&Wallet::addMoney, &walletObject, 1000));
+    }
+    for(int i = 0; i < threads.size() ; i++)
+    {
+        threads.at(i).join();
+    }
+    int val = 0;
+    for(int k = 0; k < 1000; k++)
+    {
+        EXPECT_EQ(val = walletObject.getMoney(), 5000);
+    }
+}
 
 int main()
 {
@@ -84,17 +93,9 @@ int main()
     // Question 6 Store a char * pointer in template
     ptr_holder<char *> p;
 
-    // // Question 7 Fix the compiler errors and race conditions
-    // // Convert the testerFunction() into a google test
-    // int val = 0;
-    // for(int k = 0; k < 1000; k++)
-    // {
-    //     if((val = testerFunction()) != 5000)
-    //     {
-    //         std::cout << "Error at count = "<<k<<" Money in Wallet = "<<val << std::endl;
-    //         return 1;
-    //     }
-    // }
+    // Question 7 Fix the compiler errors and race conditions
+    // testerFunction() moved to google test before main
+    
 
     // // Question 8
     // int n = 1;
@@ -116,7 +117,9 @@ int main()
     // {
     //     putchar(c);
     // }
-    return 0;                         
+
+    ::testing::InitGoogleTest();
+    return RUN_ALL_TESTS();
 
 }
 
