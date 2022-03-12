@@ -124,12 +124,11 @@ int main()
     // assuming that the intended behaviour is to print out any
     // received characters until EOF
     char c;
-    c = getchar();
-    while(c != EOF)
+    while ((c = getchar()) != EOF)
     {
         putchar(c);
-        c = getchar();
     }
+
 
     ::testing::InitGoogleTest();
     return RUN_ALL_TESTS();
