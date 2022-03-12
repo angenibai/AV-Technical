@@ -72,6 +72,7 @@ int main()
     int y = 15;
     std::cout << x << " " << y << std::endl;
 
+
     // Question 3 Get the function to run
     char *arr[] = { "ant", "bat", "cat", "dog", "egg", "fly" };
 	function(arr);
@@ -92,6 +93,7 @@ int main()
     valmap::iterator it2;
     m.insert(std::make_pair(1, 2.0));
     
+
     // Question 5
     // assuming that you want to go inside the if statement
     int i = 1, j = 1;
@@ -100,16 +102,20 @@ int main()
         std::cout << "inside if statement\n";
     }
 
+
     // Question 6 Store a char * pointer in template
     ptr_holder<char *> p;
 
+
     // Question 7 Fix the compiler errors and race conditions
     // testerFunction() moved to google test before main
+
 
     // Question 8
     int n = 1;
     const int *pp = &n;
     fn(&pp);
+
 
     // // Question 9
     person *ptr;
@@ -117,8 +123,10 @@ int main()
     ptr->age = 10;
     ptr->weight = 55.5;
 
+
     // Question 10 Initialise foo
     Foo foo(1);
+
 
     // Question 11
     // assuming that the intended behaviour is to print out any
@@ -130,6 +138,7 @@ int main()
         putchar(c);
         c = getchar();
     }
+
 
     ::testing::InitGoogleTest();
     return RUN_ALL_TESTS();
