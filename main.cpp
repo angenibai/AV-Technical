@@ -86,9 +86,7 @@ int main()
     for (int i = 0; i < NVALS; i++)
         m.insert(std::make_pair(values[i], pow(values[i], .5)));
 
-    // not sure what the purpose of the iterators are but this compiles
-    // valmap::iterator it = 100;              
-    // valmap::iterator it2(100);              
+    // not sure what the purpose of these iterators are but this compiles
     valmap::iterator it;
     valmap::iterator it2;
     m.insert(std::make_pair(1, 2.0));
@@ -97,7 +95,7 @@ int main()
     // Question 5
     // assuming that you want to go inside the if statement
     int i = 1, j = 1;
-    if ((i != 3) && (j==1))
+    if ((i != 3) && (j == 1))
     {
         std::cout << "inside if statement\n";
     }
