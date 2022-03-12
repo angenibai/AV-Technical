@@ -34,3 +34,4 @@
 # ignore for now - maybe remove?
 CMakeFiles/
 build/
+.vscode/
